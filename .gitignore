@@ -1,0 +1,6 @@
+# 忽略构建结果
+build/
+
+# 忽略 latexindent 生成的备份文件
+*.bak*
+*.log
