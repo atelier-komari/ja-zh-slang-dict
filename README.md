@@ -31,3 +31,6 @@ https://dl.ndl.go.jp/pid/1056977
 
 欢迎提交 issue 或者 PR。
 另外，完整的修订版也会在 Release 页面发布，但真的会有修订吗？
+
+构建方法：执行 `docker.sh` 中的命令，之后在 bash 环境中执行 `bash build.sh`。
+构建结果在 `build` 文件夹中。

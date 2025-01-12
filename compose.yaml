@@ -1,8 +1,8 @@
 services:
   tex:
-    image: registry.gitlab.com/islandoftex/images/texlive:TL2024-2025-01-05-full
+    build: .
     volumes:
-      - .:/ws
+      - ./project:/ws
     working_dir: /ws
     entrypoint:
       - "bash"
