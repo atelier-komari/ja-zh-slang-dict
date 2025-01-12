@@ -1,0 +1,19 @@
+name: CI
+on:
+  - push
+  - pull_request
+  - workflow_dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@cbb722410c2e876e24abbe8de2cc27693e501dcb # 2024-11-15
+      - uses: cloudposse/github-action-docker-compose-test-run@febb0983d50110eeb9dd98c4cd58415bfffdcbc0 # 2024-09-13
+        with:
+          file: compose.yaml
+          service: tex
+      - uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # 2025-01-10
+        with:
+          name: book
+          path: project/build/main.pdf

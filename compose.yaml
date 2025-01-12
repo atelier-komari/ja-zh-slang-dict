@@ -4,5 +4,6 @@ services:
     volumes:
       - ./project:/ws
     working_dir: /ws
-    entrypoint:
+    command:
       - "bash"
+      - "build.sh"

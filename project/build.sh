@@ -2,4 +2,5 @@
 
 set -exou pipefail
 
-latexmk -output-directory=build -xelatex
+# use -pvc to enable auto-recompile
+latexmk -output-directory=build -xelatex "$@"

@@ -1,1 +1,1 @@
-docker compose run --rm -it --remove-orphans tex
+docker compose run --rm -it --remove-orphans --entrypoint bash tex
