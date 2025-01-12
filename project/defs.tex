@@ -1,8 +1,25 @@
 % 使用书籍预定义模板
-% 文章主要编码为 UTF-8，编译器必须指定为 XeLaTeX
+% 文章主要编码为 UTF-8, 编译器必须指定为 XeLaTeX
 % 编译命令参见 build.sh
-\documentclass[11pt]{book}
+\documentclass[11pt,b6paper]{memoir}
 
+% 必须支持 CJK. 自动设置中英文间距
+\usepackage{xeCJK}
+\setCJKmainfont{Noto Serif CJK SC}
 
 \usepackage{fontspec}
 \setmainfont{Noto Serif CJK SC}
+
+% 获取系统信息, 需要参数 -shell-escape
+% 为 datetime2 提供 xelatex 不支持的秒
+\usepackage{texosquery}
+% 文档生成日期, 使用 iso 格式
+% 如果使用 babel, 需要放在 babel 后面
+\usepackage{datetime2}[
+    showseconds=true, 
+    showzone=true,
+    ] 
+
+
+% 各种全局设置
+
