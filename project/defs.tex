@@ -3,15 +3,20 @@
 % 编译命令参见 build.sh
 \documentclass[11pt,b6paper]{memoir}
 
+% 使用其中的 metalogo 显示引擎信息
+% = fontspec, realscripts, metalogo
+\usepackage{xltxtra}
+
 % 必须支持 CJK. 自动设置中英文间距
+% = l3kernel, l3packages, fontspec
 \usepackage{xeCJK}
 \setCJKmainfont{Noto Serif CJK SC}
 
-\usepackage{fontspec}
 \setmainfont{Noto Serif CJK SC}
 
 % 获取系统信息, 需要参数 -shell-escape
 % 为 datetime2 提供 xelatex 不支持的秒
+% = polyglossia, fontspec (if xelatex)
 \usepackage{texosquery}
 % 文档生成日期, 使用 iso 格式
 % 如果使用 babel, 需要放在 babel 后面
@@ -23,3 +28,9 @@
 
 % 各种全局设置
 
+% 最后一次 commit 时间和版本
+\newcommand{\gitversion}{\input{|"bash version.sh"}}
+\newcommand{\engineversion}{
+    {\XeLaTeX}
+    {\the\eTeXversion\eTeXrevision-\the\XeTeXversion\XeTeXrevision}
+}

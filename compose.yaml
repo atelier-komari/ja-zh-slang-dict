@@ -2,8 +2,9 @@ services:
   tex:
     build: .
     volumes:
-      - ./project:/ws
-    working_dir: /ws
+      - .:/ws
+    # will use `git` on /ws, so do not mount ./project
+    working_dir: /ws/project
     command:
       - "bash"
       - "build.sh"
