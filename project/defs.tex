@@ -1,7 +1,7 @@
 % 使用书籍预定义模板
 % 文章主要编码为 UTF-8, 编译器必须指定为 XeLaTeX
 % 编译命令参见 build.sh
-\documentclass[14pt]{ctexbook}
+\documentclass[14pt]{book}
 
 % 尺寸包
 \usepackage{geometry}
@@ -9,13 +9,9 @@
 % 页眉页脚
 \usepackage{fancyhdr}
 
-% 使用其中的 metalogo 显示引擎信息
-% = fontspec, realscripts, metalogo
-\usepackage{xltxtra}
-
-% 必须支持 CJK. 自动设置中英文间距
-% = l3kernel, l3packages, fontspec
-\usepackage{xeCJK}
+% luatex 的 CJK 支持以及字体包. 自动设置中英文间距
+\usepackage{luatexja}
+\usepackage{luatexja-fontspec}
 
 % 获取系统信息, 需要参数 -shell-escape
 % 为 datetime2 提供 xelatex 不支持的秒
@@ -24,9 +20,9 @@
 % 文档生成日期, 使用 iso 格式
 % 如果使用 babel, 需要放在 babel 后面
 \usepackage{datetime2}[
-    showseconds=true, 
-    showzone=true,
-] 
+	showseconds=true,
+	showzone=true,
+]
 
 % 文字装饰. 方框和颜色
 \usepackage{tcolorbox}
@@ -37,7 +33,7 @@
 
 % 页面参数. 装订线 8mm
 \geometry{b6paper, includehead, bindingoffset=8mm,
-    top=12mm, bottom=12mm, left=12mm, right=12mm}
+	top=12mm, bottom=12mm, left=12mm, right=12mm}
 % 段落距离
 \setlength{\parskip}{0em}
 % 段落缩进
@@ -46,84 +42,77 @@
 \linespread{1.618}
 % 超链接
 \hypersetup{colorlinks,
-    linkcolor={magenta!40!black},
-    citecolor={cyan!40!black},
-    urlcolor={blue!40!black},
+	linkcolor={magenta!40!black},
+	citecolor={cyan!40!black},
+	urlcolor={blue!40!black},
 }
 
 % 各种字体
-\setCJKmainfont{Noto Serif CJK SC}
-\setCJKsansfont{Noto Sans CJK SC}
-\setCJKmonofont{Noto Sans Mono CJK SC}
-\setmainfont{Noto Serif CJK SC}
-\setsansfont{Noto Sans CJK SC}
-\setmonofont{Noto Sans Mono CJK SC}
+\setmainjfont{Noto Serif CJK SC}
+\setsansjfont{Noto Sans CJK SC}
+\setmonojfont{Noto Sans Mono CJK SC}
 
-\newCJKfontfamily\fontJPSansSec{Noto Sans CJK JP Black}
-\newCJKfontfamily\fontJPSans{Noto Sans CJK JP}
-\newCJKfontfamily\fontJPSerifItem{Noto Serif CJK JP Black}
-\newCJKfontfamily\fontJPKlee{Klee One}
-\newCJKfontfamily\fontSCSans{Noto Sans CJK SC}
-\newCJKfontfamily\fontSCLXGW{LXGW WenKai Light}
+\newjfontfamily\fontJPSansSec{Noto Sans CJK JP Black}
+\newjfontfamily\fontJPSans{Noto Sans CJK JP}
+\newjfontfamily\fontJPSerifItem{Noto Serif CJK JP Black}
+\newjfontfamily\fontJPKlee{Klee One}
+\newjfontfamily\fontSCSans{Noto Sans CJK SC}
+\newjfontfamily\fontSCLXGW{LXGW WenKai Light}
 
 %%% 脚手架
 
 % 最后一次 commit 时间和版本
 \newcommand{\gitversion}{\input{|"bash version.sh"}}
-\newcommand{\engineversion}{
-    {\XeLaTeX}
-    {\the\eTeXversion\eTeXrevision-\the\XeTeXversion\XeTeXrevision}
-}
 
 % 词典章节 (字母)
 \newcommand{\dictsection}[2]{
-    \begin{tcolorbox}[halign=center, valign=center,
-        colback=blue!5!white, colframe=blue!75!black,
-        boxrule=0.7pt, arc=7pt
-    ]
-        \fontJPSansSec{\Huge #1 \Large #2} \label{sec:#1}
-    \end{tcolorbox}
+	\begin{tcolorbox}[halign=center, valign=center,
+			colback=blue!5!white, colframe=blue!75!black,
+			boxrule=0.7pt, arc=7pt
+		]
+		\fontJPSansSec{\Huge #1 \Large #2} \label{sec:#1}
+	\end{tcolorbox}
 }
 
 % 词典条目 4 个参数
 \newcommand{\dictitem}[4]{
-    % 用于索引的词条标签
-    \label{item:#1}
-    % 假名
-    {\fontJPSerifItem #1}
-    % 汉字表记
-    \if\relax\detokenize{#2}\relax
-    　 % 补一个全角空格
-    \else
-    \textcolor{blue!40!black}{\fontJPSans ［#2］}
-    \fi
-    % 词条领域, 使用彩框包围
-    \tcbox[on line, arc=2pt,
-        colupper=red!40!black,colback=white,colframe=gray,
-        boxsep=0pt,boxrule=0.7pt,left=1pt,right=1pt,top=1pt,bottom=1pt
-    ]{\fontSCSans #3}
-    % 词条解释
-    #4
-    \par
+	% 用于索引的词条标签
+	\label{item:#1}
+	% 假名
+	{\fontJPSerifItem #1}
+	% 汉字表记
+	\if\relax\detokenize{#2}\relax
+		\char"3000 % 补一个全角空格
+	\else
+		\textcolor{blue!40!black}{\fontJPSans ［#2］}
+	\fi
+	% 词条领域, 使用彩框包围
+	\tcbox[on line, arc=2pt,
+		colupper=red!40!black,colback=white,colframe=gray,
+		boxsep=0pt,boxrule=0.7pt,left=1pt,right=1pt,top=1pt,bottom=1pt
+	]{\fontSCSans #3}
+	% 词条解释
+	#4
+	\par
 }
 
 % 例句组 2 个参数
 \newcommand{\itemquote}[2]{
-    \tcbox[on line, arc=1pt,
-    colupper=white,colback=gray,colframe=gray,
-    boxsep=0pt,boxrule=0pt,left=1pt,right=1pt,top=1pt,bottom=1pt
-    ]{\fontSCSans 例}
-    \textcolor{blue!40!black}{\fontJPKlee 「#1」}
-    {\fontSCLXGW #2}
+	\tcbox[on line, arc=1pt,
+		colupper=white,colback=gray,colframe=gray,
+		boxsep=0pt,boxrule=0pt,left=1pt,right=1pt,top=1pt,bottom=1pt
+	]{\fontSCSans 例}
+	\textcolor{blue!40!black}{\fontJPKlee 「#1」}
+	{\fontSCLXGW #2}
 }
 
 % 词条链接
 % 花括号为显示文字
 % 方括号为词条标签, 留空则指向显示文字
 \newcommand{\dictref}[2][]{
-    \if\relax\detokenize{#1}\relax
-    \hyperref[item:#2]{#2}
-    \else
-    \hyperref[item:#1]{#2}
-    \fi
+	\if\relax\detokenize{#1}\relax
+		\hyperref[item:#2]{#2}
+	\else
+		\hyperref[item:#1]{#2}
+	\fi
 }
