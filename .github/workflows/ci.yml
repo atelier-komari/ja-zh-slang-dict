@@ -13,6 +13,10 @@ jobs:
         with:
           file: compose.yaml
           service: tex
+          workdir: project
+          entrypoint: bash
+          command: build.sh
+          registry: ghcr.io
       - uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # 2025-01-10
         with:
           name: book
