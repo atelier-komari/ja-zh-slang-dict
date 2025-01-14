@@ -2,6 +2,7 @@ services:
   tex:
     build: .
     image: custom-tex-image
+    container_name: tex-builder
     volumes:
       - .:/ws
     # will use `git` on /ws, so do not mount ./project

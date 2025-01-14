@@ -10,4 +10,6 @@ RUN <<EOF
     unzip notocjk.zip
     rm notocjk.zip
     fc-cache -fv
+
+    git config --global --add safe.directory /ws
 EOF

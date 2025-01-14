@@ -13,7 +13,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: |
-          docker compose run --rm tex
+          docker compose run --build --rm tex
           docker compose down
       - uses: actions/upload-artifact@v4
         with:
