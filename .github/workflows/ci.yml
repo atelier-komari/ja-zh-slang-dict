@@ -9,10 +9,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: adrielcodeco/docker-compose-run-action@2a32d8097b792a13512eb263e16b021ce6c1f29e # 2023-02-14
-        with:
-          compose-file: compose.yaml
-          service: tex
+      - uses: KengoTODA/actions-setup-docker-compose@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: |
+          docker compose run --rm tex
+          docker compose down
       - uses: actions/upload-artifact@v4
         with:
           name: book
