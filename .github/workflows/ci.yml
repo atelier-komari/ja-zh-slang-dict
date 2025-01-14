@@ -8,16 +8,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@cbb722410c2e876e24abbe8de2cc27693e501dcb # 2024-11-15
-      - uses: cloudposse/github-action-docker-compose-test-run@febb0983d50110eeb9dd98c4cd58415bfffdcbc0 # 2024-09-13
+      - uses: actions/checkout@v4
+      - uses: adrielcodeco/docker-compose-run-action@2a32d8097b792a13512eb263e16b021ce6c1f29e # 2023-02-14
         with:
-          file: compose.yaml
+          compose-file: compose.yaml
           service: tex
-          workdir: project
-          entrypoint: bash
-          command: build.sh
-          registry: ghcr.io
-      - uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # 2025-01-10
+      - uses: actions/upload-artifact@v4
         with:
           name: book
           path: project/build/main.pdf
