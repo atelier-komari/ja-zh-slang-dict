@@ -26,16 +26,16 @@
 
 % 页面参数. 装订线 8mm
 \geometry{b6j, includehead, bindingoffset=8mm,
-	top=12mm, bottom=12mm, left=12mm, right=12mm}
+top=12mm, bottom=12mm, left=12mm, right=12mm}
 % 段落距离
 \setlength{\parskip}{0em}
 % 段落缩进
 \setlength{\parindent}{0em}
 % 超链接
 \hypersetup{colorlinks,
-	linkcolor={magenta!40!black},
-	citecolor={cyan!40!black},
-	urlcolor={blue!40!black},
+  linkcolor={magenta!40!black},
+  citecolor={cyan!40!black},
+  urlcolor={blue!40!black},
 }
 
 % 各种字体
@@ -68,75 +68,75 @@
 
 % 词典章节 (字母)
 \newcommand{\dictsection}[2]{
-	\begin{tcolorbox}[halign=center, valign=center,
-			colback=blue!5!white, colframe=blue!75!black,
-			boxrule=0.7pt, arc=7pt
-		]
-		\label{sec:#1}
-		\section{#1}{\fontJPSansSec\Large #2}
-	\end{tcolorbox}
+  \begin{tcolorbox}[halign=center, valign=center,
+      colback=blue!5!white, colframe=blue!75!black,
+      boxrule=0.7pt, arc=7pt
+    ]
+    \label{sec:#1}
+    \section{#1}{\fontJPSansSec\Large #2}
+  \end{tcolorbox}
 }
 
 % 词典条目领域, 使用彩框包围
 \newcommand{\itemdomain}[1]{
-	\tcbox[on line, arc=2pt,
-		colupper=red!40!black,colback=white,colframe=gray,
-		boxsep=0pt,boxrule=0.7pt,left=1pt,right=1pt,top=1pt,bottom=1pt
-	]{\fontSCSans #1}
+  \tcbox[on line, arc=2pt,
+    colupper=red!40!black,colback=white,colframe=gray,
+    boxsep=0pt,boxrule=0.7pt,left=1pt,right=1pt,top=1pt,bottom=1pt
+  ]{\fontSCSans #1}
 }
 
 % 词典条目 4 个参数
 \newcommand{\dictitem}[4]{
-	% 用于索引的词条标签
-	\label{item:#1}
-	\markboth{#1}{#1}
-	% 假名
-	{\fontJPSerifItem #1}
-	% 汉字表记
-	\if\relax\detokenize{#2}\relax
-		\char"3000 % 补一个全角空格
-	\else
-		\textcolor{blue!40!black}{\fontJPSans ［#2］}
-	\fi
-	% 词条领域, 使用彩框包围
-	\itemdomain{#3}
-	% 词条解释
-	#4
-	\par
+  % 用于索引的词条标签
+  \label{item:#1}
+  \markboth{#1}{#1}
+  % 假名
+  {\fontJPSerifItem #1}
+  % 汉字表记
+  \if\relax\detokenize{#2}\relax
+  \char"3000 % 补一个全角空格
+  \else
+  \textcolor{blue!40!black}{\fontJPSans ［#2］}
+  \fi
+  % 词条领域, 使用彩框包围
+  \itemdomain{#3}
+  % 词条解释
+  #4
+  \par
 }
 
 % 例句组 2 个参数
 \newcommand{\itemquote}[2]{
-	\tcbox[on line, arc=1pt,
-		colupper=white,colback=gray,colframe=gray,
-		boxsep=0pt,boxrule=0pt,left=1pt,right=1pt,top=1pt,bottom=1pt
-	]{\fontSCSans 例}
-	\textcolor{blue!40!black}{\fontJPKlee 「#1」}
-	{\fontSCLXGW #2}
+  \tcbox[on line, arc=1pt,
+    colupper=white,colback=gray,colframe=gray,
+    boxsep=0pt,boxrule=0pt,left=1pt,right=1pt,top=1pt,bottom=1pt
+  ]{\fontSCSans 例}
+  \textcolor{blue!40!black}{\fontJPKlee 「#1」}
+  {\fontSCLXGW #2}
 }
 
 % 词条链接
 % 花括号为显示文字
 % 方括号为词条标签, 留空则指向显示文字
 \newcommand{\dictref}[2][]{
-	\if\relax\detokenize{#1}\relax
-		\hyperref[item:#2]{#2}
-	\else
-		\hyperref[item:#1]{#2}
-	\fi
+  \if\relax\detokenize{#1}\relax
+  \hyperref[item:#2]{#2}
+  \else
+  \hyperref[item:#1]{#2}
+  \fi
 }
 
 % 清除页眉页脚
 \fancypagestyle{abstract}{
-	\fancyhead{}
-	\fancyfoot{}
-	\renewcommand{\headrulewidth}{0pt}
+  \fancyhead{}
+  \fancyfoot{}
+  \renewcommand{\headrulewidth}{0pt}
 }
 
 % 正文页眉页脚
 \fancypagestyle{body}{
-	\fancyhead[C]{\fontJPSansSec\thepage}
-	\fancyhead[L]{\fontJPSans\rightmark}
-	\fancyhead[R]{\fontJPSans\leftmark}
-	\renewcommand{\headrulewidth}{0.5pt}
+  \fancyhead[C]{\fontJPSansSec\thepage}
+  \fancyhead[L]{\fontJPSans\rightmark}
+  \fancyhead[R]{\fontJPSans\leftmark}
+  \renewcommand{\headrulewidth}{0.5pt}
 }

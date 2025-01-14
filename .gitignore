@@ -4,3 +4,9 @@ build/
 # 忽略 latexindent 生成的备份文件
 *.bak*
 *.log
+
+# 忽略 latex 生成的文件
+*.aux
+*.bbl
+*.fls
+*.fdb_latexmk
