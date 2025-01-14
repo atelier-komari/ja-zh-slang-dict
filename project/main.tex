@@ -17,10 +17,16 @@
 % 完成或更新一页后, 进度以目标 tag 的形式记在右边注释
 
 % 第 000 项包含 2 页, 第 2 页空白
+\pagestyle{abstract}
+% 行距
+\setstretch{1.0}
 \input{pages/000.tex} % v1.0
 \input{pages/001.tex} % v1.0
+\setstretch{1.618}
 \input{pages/002.tex} % v1.0
 % 以下为正文
+\pagestyle{body}
+% 行距
 \setcounter{page}{1}
 \input{pages/003.tex}
 \input{pages/004.tex}
