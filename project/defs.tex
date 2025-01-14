@@ -89,6 +89,7 @@
 \newcommand{\dictitem}[4]{
 	% 用于索引的词条标签
 	\label{item:#1}
+	\markboth{#1}{#1}
 	% 假名
 	{\fontJPSerifItem #1}
 	% 汉字表记
@@ -134,7 +135,8 @@
 
 % 正文页眉页脚
 \fancypagestyle{body}{
-	\fancyhead[LE,RO]{\fontJPSansSec\thepage}
-	%\fancyhead[RE,LO]{\fontJPSansSec\leftmark}
+	\fancyhead[C]{\fontJPSansSec\thepage}
+	\fancyhead[L]{\fontJPSans\rightmark}
+	\fancyhead[R]{\fontJPSans\leftmark}
 	\renewcommand{\headrulewidth}{0.5pt}
 }
