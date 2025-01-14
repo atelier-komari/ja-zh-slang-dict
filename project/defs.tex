@@ -46,6 +46,7 @@ top=12mm, bottom=12mm, left=12mm, right=12mm}
 \newjfontfamily\fontJPSansSec{Noto Sans CJK JP Black}
 \newjfontfamily\fontJPSans{Noto Sans CJK JP}
 \newjfontfamily\fontJPSerifItem{Noto Serif CJK JP Black}
+\newjfontfamily\fontJPSerif{Noto Serif CJK JP}
 \newjfontfamily\fontJPKlee{Klee One}
 \newjfontfamily\fontSCSans{Noto Sans CJK SC}
 \newjfontfamily\fontSCSansSec{Noto Sans CJK SC Black}
@@ -89,12 +90,11 @@ top=12mm, bottom=12mm, left=12mm, right=12mm}
 \newcommand{\dictitem}[4]{
   % 用于索引的词条标签
   \label{item:#1}
-  \markboth{#1}{#1}
   % 假名
   {\fontJPSerifItem #1}
   % 汉字表记
   \if\relax\detokenize{#2}\relax
-  \char"3000 % 补一个全角空格
+  % \char"3000 % 补一个全角空格 (不甚美观, 暂且停用)
   \else
   \textcolor{blue!40!black}{\fontJPSans ［#2］}
   \fi
@@ -102,6 +102,8 @@ top=12mm, bottom=12mm, left=12mm, right=12mm}
   \itemdomain{#3}
   % 词条解释
   #4
+  % 动态页眉标记
+  \markboth{#1}{#1}
   \par
 }
 
@@ -114,6 +116,9 @@ top=12mm, bottom=12mm, left=12mm, right=12mm}
   \textcolor{blue!40!black}{\fontJPKlee 「#1」}
   {\fontSCLXGW #2}
 }
+
+% 临时切换日文的正文字体
+\newcommand{\ja}[1]{{\fontJPSerif #1}}
 
 % 词条链接
 % 花括号为显示文字
@@ -136,7 +141,7 @@ top=12mm, bottom=12mm, left=12mm, right=12mm}
 % 正文页眉页脚
 \fancypagestyle{body}{
   \fancyhead[C]{\fontJPSansSec\thepage}
-  \fancyhead[L]{\fontJPSans\rightmark}
-  \fancyhead[R]{\fontJPSans\leftmark}
+  \fancyhead[LE]{\fontJPSans\rightmark}
+  \fancyhead[RO]{\fontJPSans\leftmark}
   \renewcommand{\headrulewidth}{0.5pt}
 }

@@ -1,12 +1,12 @@
 {
   "词典条目": {
     "scope": "tex,latex",
-    "prefix": "dict",
+    "prefix": "dictitem",
     "body": ["\\dictitem{${1:假名}}{${2:汉字}}{${3:领域}}", "{${4:释义}}", "", "$0"]
   },
   "引用例句": {
     "scope": "tex,latex",
-    "prefix": ["item", "quote"],
+    "prefix": ["itemquote", "quote"],
     "body": ["\\itemquote{${1:原文}}{${2:译文}}$0"]
   }
 }
