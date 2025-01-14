@@ -52,7 +52,7 @@ top=12mm, bottom=12mm, left=12mm, right=12mm}
 \newjfontfamily\fontSCLXGW{LXGW WenKai Light}
 
 % 页眉页脚
-\pagestyle{fancy}
+\setlength{\headheight}{14pt}
 
 % 目录样式
 \titleformat{\section}[runin]{\fontJPSansSec\Huge}{}{0em}{}{}
@@ -98,7 +98,7 @@ top=12mm, bottom=12mm, left=12mm, right=12mm}
   \else
   \textcolor{blue!40!black}{\fontJPSans ［#2］}
   \fi
-  % 词条领域, 使用彩框包围
+  % 词条领域
   \itemdomain{#3}
   % 词条解释
   #4
