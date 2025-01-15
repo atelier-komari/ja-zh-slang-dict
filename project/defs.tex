@@ -17,6 +17,8 @@
 % luatex 的 CJK 支持以及字体包. 自动设置中英文间距
 \usepackage{luatexja}
 \usepackage{luatexja-fontspec}
+% 边注
+\usepackage{marginnote}
 % 文字装饰. 方框和颜色
 \usepackage{tcolorbox}
 % 各种链接
@@ -26,6 +28,7 @@
 
 % 页面参数. 装订线 8mm
 \geometry{b6j, includehead, bindingoffset=8mm,
+  marginparsep=3mm, marginparwidth=8mm,
 top=12mm, bottom=12mm, left=12mm, right=12mm}
 % 段落距离
 \setlength{\parskip}{0em}
@@ -88,10 +91,14 @@ top=12mm, bottom=12mm, left=12mm, right=12mm}
 
 % 词典条目 4 个参数
 \newcommand{\dictitem}[4]{
-  % 用于索引的词条标签
-  \label{item:#1}
   % 假名
   {\fontJPSerifItem #1}
+  % 用于索引的词条标签, 放在主 key 后面, 防止链接错误定位
+  \label{item:#1}
+  % hyperref: 需要这东西才能跳转至词条, 否则只会跳转至章节
+  \phantomsection
+  % fancyhdr: 动态页眉标记, 同样放在主 key 后面, 防止页眉错误定位
+  \markboth{#1}{#1}
   % 汉字表记
   \if\relax\detokenize{#2}\relax
   % \char"3000 % 补一个全角空格 (不甚美观, 暂且停用)
@@ -102,8 +109,6 @@ top=12mm, bottom=12mm, left=12mm, right=12mm}
   \itemdomain{#3}
   % 词条解释
   #4
-  % 动态页眉标记
-  \markboth{#1}{#1}
   \par
 }
 
@@ -123,12 +128,23 @@ top=12mm, bottom=12mm, left=12mm, right=12mm}
 % 词条链接
 % 花括号为显示文字
 % 方括号为词条标签, 留空则指向显示文字
-\newcommand{\dictref}[2][]{
+\newcommand{\dictref}[2][]{%
   \if\relax\detokenize{#1}\relax
-  \hyperref[item:#2]{#2}
+  \hyperref[item:#2]{#2}%
   \else
-  \hyperref[item:#1]{#2}
+  \hyperref[item:#1]{#2}%
   \fi
+}
+
+% 原书页码
+\newcommand{\origpagenumstyle}[1]{
+  \tcbox[on line, arc=0pt,
+    colupper=green!40!black, colback=green!5!white, colframe=green!40!black,
+    boxsep=0pt, boxrule=0.5pt, left=1pt, right=1pt, top=1pt, bottom=1pt
+  ]{\texttt{#1}}
+}
+\newcommand{\origpagenum}[1]{
+  \marginnote[\origpagenumstyle{#1}]{\origpagenumstyle{#1}}
 }
 
 % 清除页眉页脚
@@ -140,8 +156,11 @@ top=12mm, bottom=12mm, left=12mm, right=12mm}
 
 % 正文页眉页脚
 \fancypagestyle{body}{
+  % 页码不重要, 放在不容易看到的中间
   \fancyhead[C]{\fontJPSansSec\thepage}
+  % 左上角是首位词条
   \fancyhead[LE]{\fontJPSans\rightmark}
+  % 右上角是末位词条
   \fancyhead[RO]{\fontJPSans\leftmark}
   \renewcommand{\headrulewidth}{0.5pt}
 }
