@@ -137,14 +137,20 @@ top=12mm, bottom=12mm, left=12mm, right=12mm}
 }
 
 % 原书页码
+\newcounter{origpagenum}
+\newcommand{\origpagenum}{%
+\ifnum\value{origpagenum}<10 0\fi\arabic{origpagenum}
+}
 \newcommand{\origpagenumstyle}[1]{
   \tcbox[on line, arc=0pt,
     colupper=green!40!black, colback=green!5!white, colframe=green!40!black,
     boxsep=0pt, boxrule=0.5pt, left=1pt, right=1pt, top=1pt, bottom=1pt
   ]{\texttt{#1}}
 }
-\newcommand{\origpagenum}[1]{
-  \marginnote[\origpagenumstyle{#1}]{\origpagenumstyle{#1}}
+\newcommand{\orignextpage}{
+  \stepcounter{origpagenum}
+  \marginnote[\origpagenumstyle{\origpagenum}]
+  {\origpagenumstyle{\origpagenum}}
 }
 
 % 清除页眉页脚
